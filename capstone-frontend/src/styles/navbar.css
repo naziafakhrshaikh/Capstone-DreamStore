@@ -1,11 +1,109 @@
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px;
-    background-color: #e6ccb2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(30, 10, 60, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
+
+.navbar-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navbar-brand h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.08em;
+  font-style: italic;
+}
+
+.navbar-tagline {
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+}
+
+.navbar-logo {
+  font-size: 1.4rem;
+  margin-right: 8px;
+}
+
 .nav-links-container {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.checkout-link {
+  background: rgba(180, 100, 255, 0.3);
+  color: #fff !important;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  border: 1px solid var(--color-btn-border);
+  transition: all 0.2s !important;
+  white-space: nowrap;
+}
+
+.checkout-link:hover {
+  background: rgba(180, 100, 255, 0.55) !important;
+  color: #fff !important;
+}
+
+.nav-user {
+  color: var(--color-accent-light);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.logout-btn:hover {
+  color: var(--color-error);
+}
+
+.login-btn {
+  background: rgba(180, 100, 255, 0.3);
+  color: #fff !important;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  border: 1px solid var(--color-btn-border);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

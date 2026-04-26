@@ -1,24 +1,63 @@
-import React from 'react'
-import { NavLink } from 'react-router';
+import React from 'react';
+import { NavLink, useNavigate } from 'react-router';
 import { useCartStore } from '../store/CartStore';
+import { useAuthStore } from '../store/AuthStore';
 import '../styles/navbar.css';
 
 const Navbar = () => {
   const { items } = useCartStore();
+  const { user, logout } = useAuthStore();
+  const navigate = useNavigate();
+
   const totalPrice = items?.reduce((total, item) => total + item.price, 0);
+  const itemCount = items?.length || 0;
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <nav className='navbar'>
-      <h1>Header Goes Here</h1>
-      <section className='nav-links-container'>
+
+      {/* LEFT - LOGO */}
+      <div className='logo'>
+        <h1>Dream Store</h1>
+        <p className='tagline'>Dream It. Own It.</p>
+      </div>
+
+      {/* CENTER - NAV LINKS */}
+      <div className='nav-links-container'>
         <NavLink to="/" className='nav-link'>Home</NavLink>
-        {/* You will have to adjust the NavLink element below this comment to create a real checkout page, starting with creating a new route in your project and then adjusting the `to` property */}
-        <NavLink to="#" className='nav-link'>Checkout ${totalPrice}</NavLink>
-        {/* Create New NavLink Elements in your project and place them below this comment */}
+        <NavLink to="/suggest-dream" className='nav-link'>Dreams</NavLink>
+        <NavLink to="/collections" className='nav-link'>Collections</NavLink>
+        <NavLink to="/about" className='nav-link'>About</NavLink>
+      </div>
 
-        {/* Create New NavLink Elements in your project and place them above this comment */}
-      </section>
+      {/* RIGHT - AUTH + CART */}
+      <div className='nav-actions'>
+        {user ? (
+          <>
+            <span className='nav-user'>👤 {user.name}</span>
+            {user.role === 'admin' && (
+              <NavLink to="/admin" className='nav-link'>Admin</NavLink>
+            )}
+            <button className='logout-btn' onClick={handleLogout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <NavLink to="/login" className='nav-link login-btn'>
+            Login
+          </NavLink>
+        )}
+        <NavLink to="/cart" className='nav-link cart'>
+          🛒 {itemCount} | ${totalPrice?.toLocaleString() || '0'}
+        </NavLink>
+      </div>
+
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

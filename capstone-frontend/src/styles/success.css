@@ -1,0 +1,64 @@
+.success-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.success-card {
+    background: var(--color-bg-dark);
+    border: 1px solid var(--color-border);
+    border-radius: 24px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 16px 48px var(--color-glow-shadow);
+}
+
+.success-icon {
+    font-size: 4rem;
+}
+
+.success-card h1 {
+    font-size: 2rem;
+    font-style: italic;
+    color: #fff;
+}
+
+.success-card {
+    background: rgba(30, 10, 60, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border);
+    border-radius: 24px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 16px 48px var(--color-glow-shadow);
+}
+
+.success-btn {
+    background: rgba(180, 100, 255, 0.35);
+    color: #fff;
+    border: 1px solid var(--color-btn-border);
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+    margin-top: 1rem;
+}
+
+.success-btn:hover {
+    background: var(--color-accent-hover);
+}

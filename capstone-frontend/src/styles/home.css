@@ -1,0 +1,306 @@
+/* ── MAIN CONTENT ── */
+.main-content {
+    margin-top: 0;
+    padding-top: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ── TWINKLING STARS BACKGROUND ── */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--duration) ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50%       { opacity: 1; transform: scale(1.2); }
+}
+
+/* ── HERO ── */
+.hero {
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(
+        to bottom,
+        rgba(30, 10, 60, 0.55) 0%,
+        rgba(30, 10, 60, 0.2) 100%
+    );
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    font-style: italic;
+    color: #fff;
+    text-shadow: 0 2px 20px rgba(180, 100, 255, 0.6);
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+.hero-btn {
+    background: rgba(180, 100, 255, 0.35);
+    color: #fff;
+    border: 1px solid var(--color-btn-border);
+    padding: 12px 32px;
+    border-radius: var(--radius-pill);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-main);
+    letter-spacing: 0.05em;
+}
+
+.hero-btn:hover {
+    background: rgba(180, 100, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+/* ── DREAM CATEGORY BUTTONS ── */
+.dream-categories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    background: rgba(30, 10, 60, 0.3);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.dream-category-btn {
+    background: rgba(180, 100, 255, 0.2);
+    border: 1px solid var(--color-border);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.dream-category-btn:hover {
+    background: rgba(180, 100, 255, 0.45);
+    border-color: var(--color-border-hover);
+    transform: translateY(-4px) scale(1.05);
+}
+
+.dream-category-btn.active {
+    background: rgba(180, 100, 255, 0.6);
+    border-color: var(--color-border-hover);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ── PRODUCTS SECTION ── */
+.products-section {
+    padding: 2rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+.products-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+    font-style: italic;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 20px rgba(180, 100, 255, 0.5);
+}
+
+/* ── MODAL OVERLAY ── */
+.dream-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ── MODAL BOX ── */
+.dream-modal {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 700px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+.dream-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s;
+}
+
+.dream-modal-close:hover {
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+}
+
+.dream-modal-image {
+    width: 100%;
+    max-height: 380px;
+    overflow: hidden;
+    background: #f3f3f3;
+}
+
+.dream-modal-image img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+}
+
+.dream-modal-no-image {
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+.dream-modal-details {
+    padding: 1.5rem 2rem 2rem;
+}
+
+.dream-modal-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+}
+
+.dream-modal-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0.4rem 0 0.75rem;
+    color: #1a1a1a;
+}
+
+.dream-modal-description {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.dream-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.dream-modal-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.dream-modal-btn {
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.dream-modal-btn:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .dream-modal-image img,
+    .dream-modal-no-image {
+        height: 220px;
+    }
+
+    .dream-modal-details {
+        padding: 1rem 1.25rem 1.5rem;
+    }
+
+    .dream-modal-title {
+        font-size: 1.25rem;
+    }
+
+    .dream-modal-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dream-modal-btn {
+        width: 100%;
+        text-align: center;
+    }
+}

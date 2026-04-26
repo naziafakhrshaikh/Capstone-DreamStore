@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from '../services/ProductService';
-import Products from '../components/Products';
 import { useCartStore } from '../store/CartStore';
-import { useNavigate } from 'react-router';
-import '../styles/home.css';
+import '../styles/collections.css';
 
-const Home = () => {
+const CATEGORIES = ['Wealth', 'Family', 'Lifestyle', 'Career', 'Wellness', 'Health & Beauty'];
+
+const Collections = () => {
   const [products, setProducts] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('All');
   const [selectedDream, setSelectedDream] = useState(null);
   const { addItem } = useCartStore();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const productsData = await getProducts();
-        setProducts(productsData);
-        setFiltered(productsData);
+        const data = await getProducts();
+        setProducts(data);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -26,7 +22,6 @@ const Home = () => {
     fetchProducts();
   }, []);
 
-  // Close modal on Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setSelectedDream(null);
@@ -35,55 +30,40 @@ const Home = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const handleFilter = (category) => {
-    setActiveCategory(category);
-    if (category === 'All') {
-      setFiltered(products);
-    } else {
-      setFiltered(products.filter(p => p.category === category));
-    }
-  };
-
   return (
-    <main className='main-content'>
-        
-      {/* HERO SECTION */}
-      <section className='hero'>
-        <h1 className='hero-title'>Where Dreams Come True</h1>
-        <p className='hero-subtitle'>
-          <h4>Step into a world of soft magic, glowing wishes, and beautiful possibilities.</h4>
-        </p>
-        <button className='hero-btn' onClick={() => navigate('/dreams')}>
-          Explore Dreams
-        </button>
-      </section>
+    <main className='collections-page'>
+      <h1 className='collections-title'>Collections</h1>
+      <p className='collections-subtitle'>Browse dreams by category</p>
 
-      {/* DREAM CATEGORIES */}
-      <section className='dream-categories'>
-        {['All', 'Wealth', 'Family', 'Lifestyle', 'Career', 'Wellness', 'Health & Beauty'].map(cat => (
-          <div
-            key={cat}
-            className={`dream-category-btn ${activeCategory === cat ? 'active' : ''}`}
-            onClick={() => handleFilter(cat)}
-          >
-            {cat}
-          </div>
-        ))}
-      </section>
+      {CATEGORIES.map(category => {
+        const categoryProducts = products.filter(p => p.category === category);
+        if (categoryProducts.length === 0) return null;
 
-      {/* PRODUCTS */}
-      <section className='products-section'>
-        <h2>
-          {activeCategory === 'All' ? 'Featured Dreams' : `${activeCategory} Dreams`}
-        </h2>
-        <Products
-          products={filtered}
-          onAddToCart={addItem}
-          onSelectDream={(product) => setSelectedDream(product)}
-        />
-      </section>
+        return (
+          <section key={category} className='collection-section'>
+            <h2 className='collection-category-title'>{category}</h2>
+            <div className='collection-grid'>
+              {categoryProducts.map(product => (
+                <div
+                  key={product._id}
+                  className='collection-card'
+                  onClick={() => setSelectedDream(product)}
+                  style={{
+                    backgroundImage: product.image ? `url(${product.image})` : 'none',
+                  }}
+                >
+                  <div className='collection-card-overlay'>
+                    <h3>{product.name}</h3>
+                    <span>${product.price.toLocaleString()}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      })}
 
-      {/* MODAL */}
+      {/* MODAL — same as Dreams & Home */}
       {selectedDream && (
         <div className='dream-modal-overlay' onClick={() => setSelectedDream(null)}>
           <div className='dream-modal' onClick={(e) => e.stopPropagation()}>
@@ -117,9 +97,8 @@ const Home = () => {
           </div>
         </div>
       )}
-
     </main>
-   );
+  );
 };
 
-export default Home;
+export default Collections;
