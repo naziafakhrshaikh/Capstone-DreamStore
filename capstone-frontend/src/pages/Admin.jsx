@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuthStore } from '../store/AuthStore';
 import { getProducts } from '../services/ProductService';
-import { adminAddProduct, adminDeleteProduct } from '../services/AdminService';
+import { adminAddProduct, adminDeleteProduct } from '../services/adminService';
 import '../styles/admin.css';
 
 const CATEGORIES = ['Wealth', 'Family', 'Lifestyle', 'Career', 'Wellness', 'Health & Beauty'];
